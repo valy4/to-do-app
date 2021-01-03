@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Todo from "./Todo";
 
-
-function getTodoFromLocalStorage(){
-  let todosString = localStorage.getItem('todos')
-  if(todosString && todosString.length > 0){
-    return todosString.split(",")
-  }else{
-   return []
+function getTodoFromLocalStorage() {
+  let todosString = localStorage.getItem("todos");
+  if (todosString && todosString.length > 0) {
+    return todosString.split(",");
+  } else {
+    return [];
   }
 }
 
@@ -17,12 +16,12 @@ function App() {
   const [inputValue, setInputValue] = useState("");
 
   function removeTodo(todo) {
-    setTodos(todos.filter((td) => (td !== todo)))
+    setTodos(todos.filter((td) => td !== todo));
   }
 
   useEffect(() => {
-    localStorage.setItem('todos', todos)
-  }, [todos])
+    localStorage.setItem("todos", todos);
+  }, [todos]);
 
   return (
     <div id="app">
@@ -33,26 +32,30 @@ function App() {
           value={inputValue}
           onChange={(event) => {
             setInputValue(event.target.value);
-          }} 
+          }}
         ></input>
         <button
-        className="submit-button"
+          className="submit-button"
           onClick={(e) => {
-            // add todo
-            setTodos([...todos, inputValue]);
-            // clean up the field
-            setInputValue("");
+            if (inputValue && inputValue.length > 0) {
+              // add todo
+              setTodos([...todos, inputValue]);
+              // clean up the field
+              setInputValue("");
+            }
           }}
         >
           Add Todo
         </button>
       </div>
       <div className="todo-container">
-      {todos.map((todo) => (
-        <Todo todo={todo} removeTodo={removeTodo} />
-      ))}
+        {todos.map((todo) => (
+          <Todo todo={todo} removeTodo={removeTodo} />
+        ))}
       </div>
-      <p>You have <strong>{todos.length}</strong> tasks in progress</p>
+      <p>
+        You have <strong>{todos.length}</strong> tasks in progress
+      </p>
     </div>
   );
 }
