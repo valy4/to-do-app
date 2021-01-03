@@ -5,7 +5,7 @@ import Todo from "./Todo";
 
 function getTodoFromLocalStorage(){
   let todosString = localStorage.getItem('todos')
-  if(todosString.length > 0){
+  if(todosString && todosString.length > 0){
     return todosString.split(",")
   }else{
    return []
