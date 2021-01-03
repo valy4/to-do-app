@@ -9,6 +9,8 @@ Please install dependenies by running:
 
 A small todo app build with the React hooks API.
 
+#### [Live Demo](https://todo-app-react-final.netlify.app/)
+
 ---
 
 # Getting Started with Create React App
